@@ -31,20 +31,7 @@ class TelaPrincipal(arcade.Window):
             self.robo.x, self.robo.y,
             self.robo.x + self.robo.raio*np.cos(self.robo.theta),
             self.robo.y + self.robo.raio*np.sin(self.robo.theta),
-            arcade.color.BLACK_OLIVE, 5
-        )
-        arcade.draw_line(           # Linha mostrando "frente" do robo
-            self.robo.x, self.robo.y,
-            self.robo.x + self.robo.raio*np.cos(self.robo.theta),
-            self.robo.y + self.robo.raio*np.sin(self.robo.theta),
             arcade.color.BLACK, 5
-        )
-        arcade.draw_line(           # Linha mostrando "frente" do robo
-            self.robo.x + self.robo.raio*np.cos(self.robo.theta + np.pi/2),
-            self.robo.y + self.robo.raio*np.sin(self.robo.theta + np.pi/2),
-            self.robo.x + self.robo.raio*np.cos(self.robo.theta - np.pi/2),
-            self.robo.y + self.robo.raio*np.sin(self.robo.theta - np.pi/2),
-            arcade.color.YELLOW_GREEN, 5
         )
         self.sensorlinha.desenha_sensors(arcade, self.robo.x, self.robo.y, self.robo.theta)
         arcade.draw_text(f'fps: {self.fps:.2f} !', 20, 200, arcade.color.WHITE, 14)
