@@ -9,10 +9,10 @@ class Cinematica(object):
     def __init__(self):
         # variáveis cinemáticas
         self.v_max = 10
-        self.v_theta_max = 1
+        self.v_theta_max = 100
         # elementos incerciais
         self.massa = 1
-        self.momento_inercia = 1
+        self.momento_inercia = 0.05
         # Geradores de deslocamento
         self.forca_max_motor = 10
         self.braco_motor = 0.05 # Distância entre um motor e o centro de massa (eixo de rotação)

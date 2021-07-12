@@ -1,7 +1,8 @@
 import random, os, sys
 import numpy as np
 import arcade
-from robo import Robo
+from robo import Robo, Sensores
+
 
 class TelaPrincipal(arcade.Window):
     """ Main application class. """
@@ -12,6 +13,7 @@ class TelaPrincipal(arcade.Window):
         self.fps = 1
         self.fps_counter = 0
         self.robo = Robo(200, 200, 0)
+        self.sensorlinha = Sensores(5, 60, 30)
         super().__init__(self.SCREEN_WIDTH, self.SCREEN_HEIGHT, 
                          "Simulador - Seguidor de linha EBOT")
         arcade.set_background_color(arcade.color.BLUE_GRAY)
@@ -44,6 +46,7 @@ class TelaPrincipal(arcade.Window):
             self.robo.y + self.robo.raio*np.sin(self.robo.theta - np.pi/2),
             arcade.color.YELLOW_GREEN, 5
         )
+        self.sensorlinha.desenha_sensors(arcade, self.robo.x, self.robo.y, self.robo.theta)
         arcade.draw_text(f'fps: {self.fps:.2f} !', 20, 200, arcade.color.WHITE, 14)
         arcade.draw_text(f'Hello !', 10, 20, arcade.color.WHITE, 14)
 
@@ -53,7 +56,7 @@ class TelaPrincipal(arcade.Window):
         '''
         self.fps_counter += 1
         self.fps = 1/delta_time
-        self.robo.anda(10, 10, delta_time)
+        self.robo.anda(20, 5, delta_time)
         print(self.robo)
 
     def on_mouse_press(self, x, y, button, modifiers):
@@ -61,7 +64,6 @@ class TelaPrincipal(arcade.Window):
         Called whenever the mouse button is clicked.
         '''
         pass
-
 
 def main():
     TelaPrincipal()
