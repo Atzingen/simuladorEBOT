@@ -8,11 +8,11 @@ class Cinematica(object):
     '''
     def __init__(self):
         # variáveis cinemáticas
-        self.v_max = 10
-        self.v_theta_max = 100
+        self.v_max = 50
+        self.v_theta_max = 5
         # elementos incerciais
-        self.massa = 1
-        self.momento_inercia = 0.05
+        self.massa = 0.1
+        self.momento_inercia = 0.0005
         # Geradores de deslocamento
         self.forca_max_motor = 10
         self.braco_motor = 0.05 # Distância entre um motor e o centro de massa (eixo de rotação)
@@ -20,7 +20,7 @@ class Cinematica(object):
     
     def rotacao(self, motor1, motor2, v_theta, delta_time):
         torque = self.braco_motor*(motor1 - motor2)
-        a_theta = torque*self.momento_inercia
+        a_theta = torque/self.momento_inercia
         v_theta += a_theta*delta_time
         
         if v_theta > self.v_theta_max:
