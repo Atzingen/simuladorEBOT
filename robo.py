@@ -16,6 +16,8 @@ class Sensores:
         theta2 = (np.pi/2) + theta
         d = self.comprimento_sensores/(self.n_sensores-1)
         pontos = [(x1, y1)]
+        pontos_esquerda = []
+        pontos_direita = []
         for i in range(math.floor(self.n_sensores/2)):
             x2 = x1 + (i+1)*d*np.cos(theta2)
             y2 = y1 + (i+1)*d*np.sin(theta2)
@@ -23,17 +25,27 @@ class Sensores:
             y3 = y1 - (i+1)*d*np.sin(theta2)
             pontos.append((x2, y2))
             pontos.append((x3, y3))
-        return pontos
+
+            pontos_esquerda.append((x2, y2))
+            pontos_direita.append((x3, y3))
+
+        pontos_esquerda.reverse()
+        pontos_esquerda.append((x1, y1))
+        for p in pontos_direita:
+            pontos_esquerda.append(p)
+        # print(pontos_esquerda)
+            
+        return pontos_esquerda
 
     def desenha_sensors(self, arcade, x, y, theta):
         pontos = self.gera_pontos_sensores(x, y, theta)
-        # self.le_sensores(arcade, pontos)
         arcade.draw_line(pontos[-1][0], pontos[-1][1], 
-                         pontos[-2][0], pontos[-2][1],
+                         pontos[0][0], pontos[0][1],
                          arcade.color.GREEN, 5)
         for ponto in pontos:
             arcade.draw_circle_filled(ponto[0], ponto[1], 
                                       2, arcade.color.RED)
+                                      
 
 class Robo(Cinematica):
     '''
